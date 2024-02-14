@@ -1,0 +1,350 @@
+.LOG
+
+cloud 
+gcp engine
+manually / script 
+teraform - .tf
+vm instance / load balancer 
+
+node depolyment 
+ec2 
+
+https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started
+https://learn.hashicorp.com/tutorials/terraform/google-cloud-platform-build
+https://globex-innovations.atlassian.net/wiki/spaces/MILLICENT/pages/93388829/Terraform+Cloud
+
+
+can you see how we can decrypt a decryption key using pgp tool on ubuntu?
+sudo apt install pgpgpg
+gpg --output ./out.json --decrypt ./in.json
+in.json file will have decryption key
+
+- Terraform -> 
+https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started 
+
+Terraform is infrastructure as code tool.
+readable, declarative configuration files, and manages your infrastructure's lifecycle
+Using Terraform has several advantages over manually managing your infrastructure
+
+Terraform can manage infrastructure on multiple cloud platforms.
+The human-readable configuration language helps you write infrastructure code quickly.
+Terraform's state allows you to track resource changes throughout your deployments.
+You can commit your configurations to version control to safely collaborate on infrastructure.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+****** Steps for Teraform windows Docker container setup -> **** 
+- Download Terraform - https://www.terraform.io/downloads 
+Download - Amd64
+unzip file ->
+copy terraform.exe 
+C Drive - create folder terraform
+peast file - copy path and set in env variables 
+
+- Download Docker - https://docs.docker.com/desktop/install/windows-install/
+
+- Create folder  - teraform
+- create file main.tf
+- copy windows code -> https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/gcp-get-started
+
+- terraform init
+- terraform apply
+- terraform destroy
+
+----------------------------------------------------------------------------------------------------------------------------------------
+*** Build Infrastructure - Terraform GCP *** 
+
+GCP vm instance ->
+https://cloud.google.com/docs/terraform/get-started-with-terraform
+
+Docker install in ubuntu -> https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu
+
+
+https://blog.avenuecode.com/how-to-use-terraform-to-create-a-virtual-machine-in-google-cloud-platform
+
+
+how to use -
+
+****** 
+
+https://docs.google.com/document/d/1Twi053JXgFMFh6FKhPbwhsfIl6ch9aKLN3ZkN2KTolA/edit
+
+Cloud memorystore  - redis 
+A fully managed in- memory data store service for Redis
+
+feature - 
+Fully managed
+Highly scalable
+Security
+Monitoring
+Migration
+implementation - GCP Menu -> Memorystore Redis -> Enable Redis API -> Create instance 
+Creating a Redis instance- 
+https://cloud.google.com/memorystore/docs/redis/create-instance-console#creating_a_redis_instance
+https://www.youtube.com/watch?v=sVpoAdbh2nU&ab_channel=GoogleCloudTech
+
+- Primary Endpoint -> 10.61.134.11:6379
+
+
+******
+Kafka as a service 
+confleunt cloud
+payment topic 
+
+Apache Kafka is a popular event streaming platform used to collect, process, and store streaming event data
+ or data that has no discrete beginning or end. Kafka makes possible a new generation of distributed applications capable 
+ of scaling to handle billions of streamed events per minute
+
+Kafka takes streaming data and records exactly what happened and when. 
+This record is called an immutable commit log. It is immutable because it can be appended to, but not otherwise changed.
+From there, you can subscribe to the log (access the data) and you can also publish to it (add more data) from any number of streaming real-time applications,
+as well as other systems
+
+
+- Apache Kafka is a distributed streaming platform
+- Kafka is used for building real-time data pipelines and streaming apps.
+- A streaming platform has three key capabilities:
+- Publish and subscribe to streams of records, similar to a
+- message queue or enterprise messaging system.
+- Store streams of records in a fault-tolerant durable way.
+- Process streams of records as they occur.
+
+Producer/Publisher -> Message Broker -> Consumer 
+
+ccloud kafka topic create test-topicl
+
+References -
+https://confluent.cloud/home
+https://console.cloud.google.com/marketplace/product/confluent-prod/apache-kafka-on-confluent-cloud?referrer=search&project=terraform-359006 
+
+******
+IAM vs Cloudflare for preventing DDoS attack.
+google cloud armor
+
+******
+How can we containerize asp net zero docker image on google cloud. Asp net zero is similar to node js. Basically we want to deploy this microservice to google cloud using GKE.
+
+
+
+References -
+https://www.youtube.com/watch?v=_XAk5T_4-O0&ab_channel=devopswithcloud
+
+https://www.youtube.com/watch?v=PBb9iChTwDI&ab_channel=devopswithcloud
+
+https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app#cloud-shell
+
+
+Uploading Docker Images to Google Container Registry - 
+https://www.youtube.com/watch?v=9CDb9ZSsfV4&ab_channel=GoogleCloudTech
+
+
+Create Project: GKE
+Google Container Registry
+Enable service: container.googleapis.com
+Create Kubernetes Engine cluster "autopilot-cluster-1"
+Deploy a container "nginx-1" in Kubernetes Engine cluster "autopilot-cluster-1" 
+
+External IP - 
+http://35.192.204.14/
+
+in ubuntu - 
+docker images 
+docker pull nginxdemos/hello:latest
+
+
+https://sahansera.dev/deploying-aspcore-gcp/
+
+git clone https://github.com/sahansera/FoodAppCore.git
+
+https://cloud.google.com/sdk/docs/install
+https://dotnet.microsoft.com/en-us/download/dotnet
+
+
+
+- docker build -t gcr.io/gke-360505/food-app .
+
+- docker run --rm -p 8080:8181 gcr.io/gke-360505/food-app:latest
+
+Push the containerized app to Google Container Registry (GCR)
+- docker push gcr.io/gke-360505/food-app
+
+- gcloud auth configure-docker
+
+
+
+--------------------------------
+
+gcloud container clusters create hello-dotnet-cluster --num-nodes 2 --machine-type nl-standard-1 --zone europe-west1-b
+dotnet new web
+dotnet restore 
+dotnet publish
+
+cd /bin/Debug/net6.0/publish 
+touch Dockerfile 
+
+nano Dockerfile ->
+FROM ger.io/google-appengine/aspnetcore:1.1
+ADD ./ /app
+ENV ASPNETCORE_URLS-http://*:${PORT}
+WORKDIR /app
+ENTRYPOINT [ "dotnet", "HelloWorldAspNetCore.dll" ]
+
+gcloud container builds submit --tag gcr.io/dotnet-atamel/hello-dotnet:v1 .
+
+***********
+ - istio mesh use 
+ proxy 
+ sidecar
+
+ controlplane 
+ dataplane 
+
+message communication kind of AMQP
+
+
+
+-----------------------------------------------------------------------------------------------------------
+https://codelabs.developers.google.com/codelabs/cloud-istio-aspnetcore-part1#1
+
+gcloud auth list
+gcloud config list project
+gcloud config set project gke-360505
+
+dotnet --version
+dotnet new mvc -o HelloWorldAspNetCore
+
+touch Dockerfile ->
+
+
+
+docker build -t gcr.io/HelloWorldAspNetCore/hello-dotnet:v1 .
+
+docker build -t gcr.io/<project-id>/python-image:tag^C
+|
+
+docker build -t gcr.io/gke-3605050/hello-dotnet:v1 .
+
+docker run -p 8080:8080 gcr.io/${GOOGLE_CLOUD_PROJECT}/hello-dotnet:v1
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: hello-dotnet
+  name: hello-dotnet
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: hello-dotnet
+  template:
+    metadata:
+      labels:
+        run: hello-dotnet
+    spec:
+      containers:
+      - name: hello-dotnet
+        image: gcr.io/gke-360505/hello-dotnet:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+
+        
+
+        gcloud container clusters create hello-dotnet-cluster --cluster-version=latest --num-nodes 4 --zone europe-west1-b
+
+        gcloud container clusters create hello-istio --cluster-version=latest --machine-type=n1-standard-2 --num-nodes=1 --zone europe-west1-b
+
+
+
+
+
+        export PATH="$PATH:/home/kamaleshkulkarni12598/HelloWorldAspNetCore/istio-1.15.0/bin"\
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+10:24 AM 9/8/2022
+
+Docs - 
+
+https://docs.google.com/document/d/1KKESFjBIhOUCMlv4ZnzwZ81IIjz5bPPup-y2i5Br83A/edit?usp=sharing
+
+
+References 
+
+
+
+        anthos service mesh
+
+
+
+10:24 AM 9/9/2022
+
+steps - 
+
+gcloud auth list
+gcloud config list project
+gcloud config list
+
+
+gcloud config set project [project_id]
+
+
+export PROJECT_ID=$(gcloud config get-value project)
+export PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} \
+    --format="value(projectNumber)")
+export CLUSTER_NAME=central
+export CLUSTER_ZONE=us-west1-c
+export WORKLOAD_POOL=${PROJECT_ID}.svc.id.goog
+export MESH_ID="proj-${PROJECT_NUMBER}"
+
+
+gcloud projects get-iam-policy $PROJECT_ID \
+    --flatten="bindings[].members" \
+    --filter="bindings.members:user:$(gcloud config get-value core/account 2>/dev/null)"
+
+
+gcloud config set compute/zone ${CLUSTER_ZONE}
+gcloud beta container clusters create ${CLUSTER_NAME} \
+    --machine-type=e2-medium \
+    --num-nodes=2 \
+    --workload-pool=${WORKLOAD_POOL} \
+    --enable-stackdriver-kubernetes \
+    --subnetwork=default \
+    --release-channel=regular \
+    --labels mesh_id=${MESH_ID}
+
+    kubectl create clusterrolebinding cluster-admin-binding   --clusterrole=cluster-admin   --user=$(whoami)@qwiklabs.net
+
+    kubectl create clusterrolebinding cluster-admin-binding \
+  --clusterrole=cluster-admin \
+  --user=$(gcloud config get-value core/account)
+
+
+  ./asmcli validate \
+  --project_id gke-360505 \
+  --cluster_name central \
+  --cluster_location us-west1-c \
+  --fleet_id gke-360505 \
+  --output_dir ./asm_output
+
+
+  Task 5. Install Anthos Service Mesh
+
+
+  ./asmcli install \
+  --project_id gke-360505 \
+  --cluster_name central \
+  --cluster_location us-west1-c \
+  --fleet_id gke-360505 \
+  --output_dir ./asm_output \
+  --enable_all \
+  --option legacy-default-ingressgateway \
+  --ca mesh_ca \
+  --enable_gcp_components
+
+  
